@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\modulos",
+    "\\src\\modulos\\daybook",
+    "\\src\\modulos\\daybook\\components",
+    "\\src\\modulos\\daybook\\layuots",
+    "\\src\\modulos\\daybook\\views",
+    "\\src\\router",
+    "\\src\\styles",
+    "\\src\\views"
+  ],
+  "SelectedNode": "\\src\\modulos\\daybook\\components\\Fab.vue",
+  "PreviewInSolutionExplorer": false
+}
