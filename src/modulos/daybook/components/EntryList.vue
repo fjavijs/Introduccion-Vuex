@@ -4,29 +4,47 @@
             <input type="text" 
                    class="form-control" 
                    placeholder="Buscar entrada"
+                   v-model="term"
             />
         </div> 
         <div class="entry-scrollarea">
           <!--Componente Entry importado-->
             <Entry
-                v-for = "item in 100"
-                :key ="item"
+                v-for = "entry in getEntriesByTerm"
+                :key ="entry.id"
+                :entry="entry"
             />
         </div>
     </div>
 </template>  
 
 <script>
-import { defineAsyncComponent } from "vue";
+    import { defineAsyncComponent } from 'vue'
+    import { mapGetters } from 'vuex'
 
-export default {
+
+    export default {
 
         //Importo el componente Entry y lo coloca dentro de el elemento EntryList con el v-for lo replicamos x veces.
         components: {
             Entry: defineAsyncComponent(() => import('@/modulos/daybook/components/Entry.vue'))
+        },
+
+        // Desestructuro mapGetters del modulo journal y cojo el getters llamado getEntriesByTerm
+        computed: {
+            ...mapGetters('journal', ['getEntriesByTerm']),
+            entriesByTerm() {
+                return this.getEntriesByTerm(this.term)
+            }
+        },
+        data() {
+            return {
+                term: '' // insertar en caja de texto, dato para poder trabajar
+            }
         }
-        
+
     }
+
 </script>
 
 

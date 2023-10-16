@@ -14,4 +14,6 @@ const journalModule = {
 
 }
 
+/*172*/
+
 export default journalModule 

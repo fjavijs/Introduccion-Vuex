@@ -1,9 +1,9 @@
 <template>
     <div class="entry-title d-flex justify-content-between p-2">
         <div>
-            <span class="text-success fs-3 fw-bold">15</span>
-            <span class="mx1 fs-3 ">Julio</span>
-            <span class="mx-2 fs-3 fw-bold">2023, martes</span>
+            <span class="text-success fs-3 fw-bold">{{ day }}</span>
+            <span class="mx1 fs-3 ">{{ month }}</span>
+            <span class="mx-2 fs-3 fw-bold">{{yearDay}}</span>
         </div>
         <div>
             <button class="btn btn-danger mx-2">
@@ -22,32 +22,86 @@
     </div>
     <hr>
     <div class="d-flex flex-column px-3 h-75">
-        <textarea placeholder="¿Qué sucedió hoy?">
+        <textarea v-model="entry.text" placeholder="¿Qué sucedió hoy?">
         </textarea>
     </div>
-    <Fab icon="fa-upload"/>
+    <Fab icon="fa-upload" />
 </template>
 
 <script>
-import { defineAsyncComponent } from "vue";
+    import { defineAsyncComponent } from "vue";
+    import { mapGetters } from "vuex";
+    import getDayMonthYear  from '@/modulos/daybook/helpers/getDayMonthYear'
 
-export default {
+    export default {
+        props: {
+            id: {
+                type: String,
+                required:true
+            }
+
+        },
+
         components: {
             Fab: defineAsyncComponent(() => import('../components/Fab.vue'))
-                }
+        },
+
+        data() {
+            return {
+                entry:null
+            }
+        },
+
+        computed: {
+            ...mapGetters('journal', ['getEntryById']),
+
+            // Desestructurar objeto
+            day() {
+                const { day } = getDayMonthYear(this.entry.date)
+                console.log(day)
+                console.log(this.entry.date)
+                return day
+            },
+            month() {
+                const { month } = getDayMonthYear(this.entry.date)
+                return month
+            },
+            yearDay() {
+                const { yearDay } = getDayMonthYear(this.entry.date)
+                return yearDay
+            }
+        },
+
+        methods: {
+
+            loadEntry() {
+                const entry = this.getEntryById( this.id )
+                if (!entry) this.$router.push({ name: 'no-entry' }) // Si no existe mando a esta ruta el id
+                this.entry = entry // Si existe ok
+
+            }
+
+        },
+
+        created() {
+        //console.log(this.$route.params.id) // Sin crear property
+
+        this.loadEntry()
         
+        }
+
     }
 </script>
 
 
 <style lang="scss" scoped>
 
-    textarea{
-        font-size:20px;
-        border:none;
-        height:100%;
+    textarea {
+        font-size: 20px;
+        border: none;
+        height: 100%;
 
-        &:focus{
+        &:focus {
             outline: none;
         }
     }
