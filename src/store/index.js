@@ -1,10 +1,15 @@
 import { createStore } from 'vuex'
-import journal  from '@/modulos/daybook/store/journal'
-// Create a new store instance.
+
+import journal from '../modules/daybook/store/journal'
+
+
 const store = createStore({
     modules: {
         journal
     }
 })
-export default store
 
+
+
+
+export default store

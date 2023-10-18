@@ -1,8 +1,14 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src\\modulos\\daybook\\views"
+    "\\src",
+    "\\src\\api",
+    "\\src\\modules",
+    "\\src\\modules\\daybook",
+    "\\src\\modules\\daybook\\store",
+    "\\src\\modules\\daybook\\store\\journal",
+    "\\src\\modules\\daybook\\views"
   ],
-  "SelectedNode": "\\src",
+  "SelectedNode": "\\src\\modules\\daybook\\views\\EntryView.vue",
   "PreviewInSolutionExplorer": false
 }
